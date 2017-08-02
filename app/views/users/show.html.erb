@@ -1,0 +1,58 @@
+<div class="page-header">
+  <h1>My Account</h1>
+</div>
+
+<div class="row">
+  <div class="col-sm-12">
+
+    <p>
+      <strong>Name:</strong> <%= @user.name %>
+    </p>
+
+    <p>
+      <strong>Email Address:</strong> <%= @user.email %>
+    </p>
+
+    <p>
+      <strong>Password:</strong> <%= @user.password %>
+    </p>
+
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-10 well">
+
+    <h3>Account List</h3>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Account ID</th>
+          <th>Account Number</th>
+        </tr>
+      </thead>
+      <tbody>
+
+      <% BankAccount.all.each do |account| %>
+        <% if account.user_id == session["user_id"] %>
+          <tr>
+            <td><%= account.bankaccount_id %></td>
+            <td><%= link_to "#{account.bankaccount_number }", "/transactions" %></td>
+          </tr>
+        <% end %>
+
+      <% end %>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-12">
+
+    <h3><a href="/transactions">Recent Transaction</a></h3>
+
+
+  </div>
+</div>

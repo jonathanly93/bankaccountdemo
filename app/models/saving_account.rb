@@ -1,0 +1,2 @@
+class SavingAccount < ApplicationRecord
+end
