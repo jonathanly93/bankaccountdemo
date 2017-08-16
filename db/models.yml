@@ -1,20 +1,24 @@
 User
   user_id: integer
-  name: text
-  password_digest: text
-  email: text
+  name: string
+  password_digest: string
+  email: string
   create_at: datetime
   updated_at: datetime
+  main_account_id: string
 
 BankAccount
   user_id: integer
-  bankaccount_id: integer
+  bankaccount_id: string
   bankaccount_number: string
   balance: integer
 
 Transaction
-  bankaccount_id1: integer
-  bankaccount_id2: integer
+  bankaccount_number1: string
+  bankaccount_number2: string
+  email1: string
+  email2: string
+  action: string
   transfer: integer
   updated_at: datetime
 

@@ -16,7 +16,6 @@
         <% if session["user_id"].present? %>
           <% user = User.find_by(id: session["user_id"]) %>
           <li><%= link_to 'User Stories', "/help" %></li>
-          <li><%= link_to 'Open an Account', "/account/help" %></li>
           <li><%= link_to "Transaction History", "/transactions" %></li>
        <% else %>
         <li><%= link_to 'User Stories', "/help" %></li>

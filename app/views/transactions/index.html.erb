@@ -2,4 +2,35 @@
   <h1>Transactions</h1>
 </div>
 
-<h4>WIP</h4>
+<div class="row">
+  <div class="col-sm-10 well">
+
+    <h3>List of Transaction</h3>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Account ID</th>
+          <th>Action</th>
+          <th>Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+
+
+      <% Transaction.all.each do |transaction| %>
+        <% BankAccount.all.each do |account| %>
+          <% if account.user_id == session["user_id"] && account.bankaccount_number == transaction.bankaccount_number %>
+
+            <tr>
+              <td><%= transaction.bankaccount_number %></td>
+              <td><%= transaction.action %></td>
+              <td><%= transaction.transfer %></td>
+            </tr>
+          <% end %>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+  </div>
+</div>

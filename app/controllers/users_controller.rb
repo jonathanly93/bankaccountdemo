@@ -3,6 +3,18 @@ class UsersController < ApplicationController
   def new
   end
 
+  def update
+    user = User.find_by(user_id: params['user_id'])
+    user.main_account_id = params["account"]
+
+    if user.main_account_id == nil
+      redirect_to "/users/#{user.id}", alert: "You must select an account!"
+    else
+      user.save
+      redirect_to "/users/#{user.id}", notice: "Main Account has been changed"
+    end
+  end
+
   def create
     user = User.new
     user.name = params['name']

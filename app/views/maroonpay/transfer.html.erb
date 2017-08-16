@@ -1,8 +1,3 @@
-<div class="page-header">
-  <h1>MaroonPay</h1>
-
-</div>
-
 <div class="row">
   <div class="col-sm-10 well">
 
@@ -33,16 +28,24 @@
   </div>
 </div>
 
-<h3> Please select an account and enter the amount of money you want to deposit </h3>
-<h7> Note that we only accept whole dollar bills. Anything else and the dollar is rounded down! </h7>
-
+<h5> Select an account you want to use to transfer money and type in the email address of the person receiving your payment</h5>
 <div class="row">
   <div class="col-sm-4">
+    <% user = User.find_by(id: session["user_id"]) %>
+  <%= form_tag("/maroonpay_2", method: 'post', autofocus: true) do  %>
 
-  <%= form_tag("/transactions/process3", method: 'post') do  %>
+  <div class="form-group">
+    <%= label_tag :email, "Transferee Email:" %>
+    <%= text_field_tag :email, "", autofocus: true, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= label_tag :amount, "Amount to Transfer:" %>
+    <%= text_field_tag :amount, "", autofocus: true, class: 'form-control' %>
+  </div>
 
     <div class="form-group">
-      <%= label_tag :account, "Account Transferer" %>
+      <%= label_tag :account, "Select Account" %>
       <select name= "account">
           <option disabled selected value> -- select an option -- </option>
           <% BankAccount.all.each do |account| %>
@@ -52,23 +55,10 @@
           <% end %>
     </div>
 
-    <div class="form-group">
-      <%= label_tag :amount, "Amount to Transfer" %>
-      <%= text_field_tag :amount, "", class: 'form-control' %>
-    </div>
 
-    <div class="form-group">
-      <%= label_tag :account2, "Account Receiver" %>
-      <select name= "account2">
-          <option disabled selected value> -- select an option -- </option>
-          <% BankAccount.all.each do |account| %>
-            <% if account.user_id == session["user_id"] %>
-                <option value = "<%="#{account.bankaccount_number }"%>" id ="donor"><%="#{account.bankaccount_number }"%></option>
-            <% end %>
-          <% end %>
-    </div>
 
-<%= submit_tag "Transfer", class: 'btn  btn-sm'%>
+    <%= submit_tag "Confirm", class: 'btn  btn-sm'%>
+    <br><br>
   <% end %>
 
   </div>

@@ -12,10 +12,55 @@
     <p>
       <strong>Email Address:</strong> <%= @user.email %>
     </p>
-
     <p>
-      <strong>Password:</strong> <%= @user.password %>
+      <strong>Current Main Account:</strong> <%= @user.main_account_id %>
+      <br><br><br>
     </p>
+      <div class="row">
+        <div class="col-sm-4">
+          <% user = User.find_by(id: session["user_id"]) %>
+        <%= form_tag("/user/update", method: 'post') do  %>
+
+          <div class="form-group">
+            <%= label_tag :account, "Change Main Account" %>
+            <select name= "account">
+                <option disabled selected value> -- select an option -- </option>
+                <% BankAccount.all.each do |account| %>
+                  <% if account.user_id == session["user_id"] %>
+                      <option value = "<%="#{account.bankaccount_number }"%>" id ="donor"><%="#{account.bankaccount_number }"%></option>
+                  <% end %>
+                <% end %>
+          </div>
+
+          <%= submit_tag "Change", class: 'btn  btn-sm'%>
+          <br><br>
+        <% end %>
+
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-4">
+          <% user = User.find_by(id: session["user_id"]) %>
+        <%= form_tag("/user/delete", method: 'post') do  %>
+
+          <div class="form-group">
+            <%= label_tag :account, "Delete an Account" %>
+            <select name= "account">
+                <option disabled selected value> -- select an option -- </option>
+                <% BankAccount.all.each do |account| %>
+                  <% if account.user_id == session["user_id"] %>
+                      <option value = "<%="#{account.bankaccount_number }"%>" id ="donor"><%="#{account.bankaccount_number }"%></option>
+                  <% end %>
+                <% end %>
+          </div>
+
+          <%= submit_tag "Delete", class: 'btn  btn-sm'%>
+          <br><br>
+        <% end %>
+
+        </div>
+      </div>
 
   </div>
 </div>
@@ -30,6 +75,7 @@
         <tr>
           <th>Account ID</th>
           <th>Account Number</th>
+          <th>Current Balance</th>
         </tr>
       </thead>
       <tbody>
@@ -38,21 +84,13 @@
         <% if account.user_id == session["user_id"] %>
           <tr>
             <td><%= account.bankaccount_id %></td>
-            <td><%= link_to "#{account.bankaccount_number }", "/transactions" %></td>
+            <td><%= account.bankaccount_number %></td>
+            <td><%= account.balance %></td>
           </tr>
         <% end %>
 
       <% end %>
     </tbody>
   </table>
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-sm-12">
-
-    <h3><a href="/transactions">Recent Transaction</a></h3>
-
-
   </div>
 </div>

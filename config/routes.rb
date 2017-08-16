@@ -6,6 +6,9 @@ Rails.application.routes.draw do
   # Banks
   get '/banks' => 'banks#index'
 
+  # Info
+  get '/info' => 'info#index'
+
 
   # Sessions
 
@@ -17,6 +20,8 @@ Rails.application.routes.draw do
   # Users
   post '/user' => 'user#create'
   get '/users/#{session["user_id"]}/transactions' => 'transactions#index'
+  post '/user/update' => 'users#update'
+  post '/user/delete' => 'checking_accounts#delete'
 
   # User Stories
   get '/help' => 'user_stories#index'
@@ -26,22 +31,25 @@ Rails.application.routes.draw do
   get '/checking_account/new' => 'checking_accounts#new'
   post 'checking_account/create' => 'checking_accounts#create'
 
-  # Savings Account
-  get '/saving_account/help' => 'saving_accounts#index'
-  get '/saving_account/new' => 'saving_account#new'
-
   # MaroonPay
   get '/maroonpay/help' => 'maroonpay#index'
   get '/maroonpay' => 'maroonpay#new'
+  get '/maroonpay/payment' => 'maroonpay#show'
+  get '/maroonpay/withdraw' => 'maroonpay#show2'
+  get '/maroonpay_2' => 'maroonpay#transfer'
+  post 'maroonpay_2' => 'maroonpay#transferout'
+#  post '/maroonpay/payment' => 'transactions#create'
 
-  # Account
-  get '/account/help' => 'account#index'
-
-  get '/info' => 'info#index'
 
   # Transaction
   get '/transactions' => 'transactions#index'
+  post '/transactions/process' => 'transactions#create'
+  post '/transactions/process2' => 'transactions#withdraw'
+  post '/transactions/process3' => 'transactions#move'
+  get '/transactions/process' => 'transactions#new'
+
 
   resources :banks
   resources :users
+
 end

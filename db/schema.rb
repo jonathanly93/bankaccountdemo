@@ -14,7 +14,7 @@ ActiveRecord::Schema.define(version: 0) do
 
   create_table "bank_accounts", force: :cascade do |t|
     t.integer "user_id"
-    t.integer "bankaccount_id"
+    t.string "bankaccount_id"
     t.string "bankaccount_number"
     t.integer "balance"
     t.index ["bankaccount_id"], name: "index_bank_accounts_on_bankaccount_id"
@@ -22,19 +22,21 @@ ActiveRecord::Schema.define(version: 0) do
   end
 
   create_table "transactions", force: :cascade do |t|
-    t.integer "bankaccount_id1"
-    t.integer "bankaccount_id2"
     t.integer "transfer"
     t.datetime "updated_at"
+    t.string "action"
+    t.string "bankaccount_number"
   end
 
   create_table "users", force: :cascade do |t|
     t.integer "user_id"
-    t.text "name"
-    t.text "email"
+    t.string "name"
+    t.string "email"
     t.datetime "create_at"
     t.datetime "updated_at"
-    t.text "password_digest"
+    t.string "password_digest"
+    t.string "main_account_id"
+    t.index ["main_account_id"], name: "index_users_on_main_account_id"
     t.index ["user_id"], name: "index_users_on_user_id"
   end
 
