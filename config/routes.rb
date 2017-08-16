@@ -1,35 +1,35 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
-  root 'banks#index'
+  root 'bank#index'
 
   # Banks
-  get '/banks' => 'banks#index'
+  get '/banks' => 'bank#index'
 
   # Info
   get '/info' => 'info#index'
 
-
   # Sessions
 
-  get 'sessions/new' => 'sessions#new', as: 'new_session'
-  post 'sessions' => 'sessions#create'
+  get 'sessions/new' => 'session#new', as: 'new_session'
+  post 'sessions' => 'session#create'
 
-  delete '/logout' => 'sessions#destroy'
+  delete '/logout' => 'session#destroy'
 
   # Users
   post '/user' => 'user#create'
-  get '/users/#{session["user_id"]}/transactions' => 'transactions#index'
-  post '/user/update' => 'users#update'
-  post '/user/delete' => 'checking_accounts#delete'
+#  get '/user/#{session["user_id"]}/transactions' => 'transaction#index'
+  get '/user/#{session["user_id"]}' => 'user#show'
+  post '/user/update' => 'user#update'
+  post '/user/delete' => 'checking_account#delete'
 
   # User Stories
   get '/help' => 'user_stories#index'
 
   # Checking Accounts
-  get '/checking_account/help' => 'checking_accounts#index'
-  get '/checking_account/new' => 'checking_accounts#new'
-  post 'checking_account/create' => 'checking_accounts#create'
+  get '/checking_account/help' => 'checking_account#index'
+  get '/checking_account/new' => 'checking_account#new'
+  post 'checking_account/create' => 'checking_account#create'
 
   # MaroonPay
   get '/maroonpay/help' => 'maroonpay#index'
@@ -37,19 +37,15 @@ Rails.application.routes.draw do
   get '/maroonpay/payment' => 'maroonpay#show'
   get '/maroonpay/withdraw' => 'maroonpay#show2'
   get '/maroonpay_2' => 'maroonpay#transfer'
-  post 'maroonpay_2' => 'maroonpay#transferout'
-#  post '/maroonpay/payment' => 'transactions#create'
-
+  post '/maroonpay_2' => 'maroonpay#transferout'
 
   # Transaction
-  get '/transactions' => 'transactions#index'
-  post '/transactions/process' => 'transactions#create'
-  post '/transactions/process2' => 'transactions#withdraw'
-  post '/transactions/process3' => 'transactions#move'
-  get '/transactions/process' => 'transactions#new'
+  get '/transactions' => 'transaction#index'
+  post '/transactions/process' => 'transaction#create'
+  post '/transactions/process2' => 'transaction#withdraw'
+  post '/transactions/process3' => 'transaction#move'
 
-
-  resources :banks
-  resources :users
+  resources :bank
+  resources :user
 
 end

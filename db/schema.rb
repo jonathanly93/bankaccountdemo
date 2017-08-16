@@ -26,6 +26,8 @@ ActiveRecord::Schema.define(version: 0) do
     t.datetime "updated_at"
     t.string "action"
     t.string "bankaccount_number"
+    t.integer "user_id"
+    t.index ["user_id"], name: "index_transactions_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

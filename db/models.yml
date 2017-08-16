@@ -14,10 +14,8 @@ BankAccount
   balance: integer
 
 Transaction
-  bankaccount_number1: string
-  bankaccount_number2: string
-  email1: string
-  email2: string
+  bankaccount_number: string
+  user_id: integer
   action: string
   transfer: integer
   updated_at: datetime
